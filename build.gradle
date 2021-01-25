@@ -1,0 +1,46 @@
+plugins {
+    id 'org.springframework.boot' version '2.1.16.RELEASE'
+    id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+ext["h2.version"] = "1.4.200" // h2 데이터베이스 버전 지정
+ext["hibernate.version"] = "5.4.20.Final" // 하이버네이트 버전 지정
+
+group = 'jpabook'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    implementation('org.springframework.boot:spring-boot-starter-hateoas')
+    implementation('com.fasterxml.jackson.datatype:jackson-datatype-hibernate5')
+
+    compile 'com.jcraft:jsch:0.1.53'
+    compile('org.springframework.boot:spring-boot-devtools')
+    compileOnly 'org.projectlombok:lombok'
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.6.0")
+}
+
+tasks.test {
+    useJUnitPlatform()
+}
